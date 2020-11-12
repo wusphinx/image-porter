@@ -21,7 +21,7 @@ jobs:
       - name: Pull Image
         run:
           docker pull gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.18.0
-          docker tag gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.18.0  ${{ secrets.DOCKERHUB_USERNAME }}/kubeconfigwriter:v0.18.0
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/kubeconfigwriter:v0.18.0
+          docker tag gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.18.0  wusphinx/kubeconfigwriter:v0.18.0
+          docker push wusphinx/kubeconfigwriter:v0.18.0
 
       

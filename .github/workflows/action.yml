@@ -22,10 +22,10 @@ jobs:
         run: |
           docker pull gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.18.0
           docker tag gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.18.0  wusphinx/tektoncd-kubeconfigwriter:v0.18.0
-          docker pull gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.18
-          docker tag gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.18 wusphinx/tektoncd-controller:v0.18
+          docker pull gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.18.0
+          docker tag gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.18.0 wusphinx/tektoncd-controller:v0.18.0
 
       - name: Push Image
         run: |
           docker push wusphinx/tektoncd-kubeconfigwriter:v0.18.0
-          docker push wusphinx/tektoncd-controller:v0.18
+          docker push wusphinx/tektoncd-controller:v0.18.0

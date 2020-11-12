@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
       - name: Pull Image
-        run:
+        run: |
           docker pull gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.18.0
           docker tag gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.18.0  wusphinx/kubeconfigwriter:v0.18.0
           docker push wusphinx/kubeconfigwriter:v0.18.0

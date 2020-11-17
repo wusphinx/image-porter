@@ -24,8 +24,11 @@ jobs:
           docker tag gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.18.0  ${{ secrets.DOCKERHUB_USERNAME }}/tektoncd-kubeconfigwriter:v0.18.0
           docker pull gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.18.0
           docker tag gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.18.0 ${{ secrets.DOCKERHUB_USERNAME }}/tektoncd-controller:v0.18.0
+          docker pull gcr.io/distroless/static:nonroot
+          docker tag gcr.io/distroless/static:nonroot ${{ secrets.DOCKERHUB_USERNAME }}/distroless-static:nonroot
 
       - name: Push Image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/tektoncd-kubeconfigwriter:v0.18.0
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/tektoncd-controller:v0.18.0
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/distroless-static:nonroot

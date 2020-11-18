@@ -4,12 +4,13 @@ on:
   push:
     branches:
       - main
+      - acr
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [3.6]
 
     steps:
       - name: Checkout
@@ -29,12 +30,12 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Login to GitHub Container Registry
+      - name: Login to Aliyun Container Registry
         uses: docker/login-action@v1 
         with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.CR_PAT }}
+          registry: registry.cn-hangzhou.aliyuncs.com
+          username: ${{ secrets.ALI_USER }}
+          password: ${{ secrets.ALI_PAT }}
 
       - name: Porter Image
         run: |

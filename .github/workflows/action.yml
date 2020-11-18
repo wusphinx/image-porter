@@ -37,5 +37,7 @@ jobs:
           password: ${{ secrets.CR_PAT }}
 
       - name: Porter Image
+        env:
+          repository_owner: ${{ github.repository_owner }}
         run: |
           python main.py image.conf

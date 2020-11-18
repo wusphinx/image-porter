@@ -37,6 +37,5 @@ jobs:
           password: ${{ secrets.CR_PAT }}
 
       - name: Porter Image
-        run: 
-          shell: bash
-          working-directory: ./
+        run: |
+          python main.py image.conf

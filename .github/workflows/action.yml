@@ -7,28 +7,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
-      - name: Pull Image
+      - name: Porter Image
         run: |
-          docker pull gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.18.0
-          docker tag gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/kubeconfigwriter:v0.18.0  ${{ secrets.DOCKERHUB_USERNAME }}/tektoncd-kubeconfigwriter:v0.18.0
-          docker pull gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.18.0
-          docker tag gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/controller:v0.18.0 ${{ secrets.DOCKERHUB_USERNAME }}/tektoncd-controller:v0.18.0
-          docker pull gcr.io/distroless/static:nonroot
-          docker tag gcr.io/distroless/static:nonroot ${{ secrets.DOCKERHUB_USERNAME }}/distroless-static:nonroot
-
-      - name: Push Image
-        run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/tektoncd-kubeconfigwriter:v0.18.0
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/tektoncd-controller:v0.18.0
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/distroless-static:nonroot
+          python main.py image.conf

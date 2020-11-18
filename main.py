@@ -15,9 +15,9 @@ class ImagePorter:
     
     def handle(self):
         for src, dst in self.s2d.items():
-            subprocess.run(["docker", "pull", src]) 
-            subprocess.run(["docker", "tag", src, dst]) 
-            subprocess.run(["docker", "push", dst]) 
+            subprocess.run(["docker", "pull", src], shell=True) 
+            subprocess.run(["docker", "tag", src, dst], shell=True) 
+            subprocess.run(["docker", "push", dst], shell=True) 
             
 def main():
     filepath = sys.argv[1]
